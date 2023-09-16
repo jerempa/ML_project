@@ -4,11 +4,13 @@ import pandas as pd
 def main():
     df = load_data()
 
-    #select_columns_and_rows(df)
+    return df
 
 
 def load_data():
     df = pd.read_csv("players_and_transf.csv")
+
+    #print(df.shape)
 
     df = subset_df(df)
     
@@ -23,27 +25,17 @@ def subset_df(df):
     df = df[df["season"].isin(season_list)] #select certain position and certain seasons
 
 
-    df = df[["age", "apps", "mins", "goals", "assists", "motm", "rating", "league", "traded"]]
+    df = df[["name", "age", "apps", "mins", "goals", "assists", "motm", "rating", "traded"]]
 
-    #print(df.shape) # Only select forwards and columns that are either a target or a feature
-    print(df.isnull().values.any()) #NaN values are not present on the df after subsetting
+    #print(df.isnull().values.any(), df.isnull().sum().sum()) #No Nan values after subsettting
 
-    #print(df.isnull().sum().sum()) #There are 0 null values
-
-    #print(df.columns.values)
-
+    #print(df.head())
+    #print(df.shape)
+    #print(df.nunique())
     #for column in df.columns.values:
         #print(df[column].isnull().sum(), column)
     return df
 
-def select_columns_and_rows(df):
-    #print(df["season"])
-    #new_df = df.loc["2010/2011":"2019/2020"]
-    #print(new_df)
-    #new_df = df.loc[["age",]]
-    #print(df.head())
-
-    return df
 
 
 main()
